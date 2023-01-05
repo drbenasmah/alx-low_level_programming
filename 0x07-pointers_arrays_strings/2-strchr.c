@@ -1,5 +1,3 @@
-
-
 #include "main.h"
 #define NULL 0
 
