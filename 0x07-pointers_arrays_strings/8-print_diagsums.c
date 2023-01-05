@@ -1,11 +1,13 @@
+
+
 #include "main.h"
 #include <stdio.h>
 
 /**
- * * print_diagsums - print sums of diagonals in matrix
- * * @a: matrix
- * * @size: size of matrix
-*/
+  * print_diagsums - print sums of diagonals in matrix
+  * @a: matrix
+  * @size: size of matrix
+  */
 
 void print_diagsums(int *a, int size)
 {
@@ -14,17 +16,17 @@ void print_diagsums(int *a, int size)
 				int row, i;
 
 					for (row = 0; row < size; row++)
-					{
-						i = (row * size) + row;
-						diagonal_sum_1 += a[i];
-					}
+							{
+										i = (row * size) + row;
+												diagonal_sum_1 += a[i];
+													}
 
-					for (row = 1; row <= size; row++)
-					{
-						i = (row * size) - row;
-						diagonal_sum_2 += a[i];
-					}
+						for (row = 1; row <= size; row++)
+								{
+											i = (row * size) - row;
+													diagonal_sum_2 += a[i];
+														}
 
-					printf("%d, %d\n", diagonal_sum_1, diagonal_sum_2);
+							printf("%d, %d\n", diagonal_sum_1, diagonal_sum_2);
 
 }
