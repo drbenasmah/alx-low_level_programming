@@ -1,1 +1,1 @@
-Maloc
+Structures, typedef
