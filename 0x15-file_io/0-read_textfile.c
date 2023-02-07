@@ -1,32 +1,53 @@
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
 #include "main.h"
+
 /**
- * read_textfile - Reads a textfile and prints the contents to the POSIX STDOUT
- * @filename: The name of the file to read from
- * @letters: The number of characters it should print to the STDOUT
- * Return: Returns the number of characters printed
+ * read_textfile - reads and prints from a file
+ * @filename: path to file
+ * @letters: chars to read
+ * Return: chars read
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	ssize_t fild = 0, chk = 0;
-	char *buffer;
+	int fd;
+	char *buff;
+	ssize_t bytes, r;
 
-	if (!filename || !letters)
+	if (!filename)
 		return (0);
-
-	fild = open(filename, O_RDONLY);
-	if (fild < 0)
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+	{
+		close(fd);
 		return (0);
+	}
 
-	buffer = malloc(sizeof(char) * (letters));
-	if (!buffer)
+	buff = malloc(sizeof(char) * letters);
+	if (!buff)
+	{
+		close(fd);
 		return (0);
+	}
 
-	chk = read(fild, buffer, letters);
-	chk = write(STDOUT_FILENO, buffer, chk);
-	if (chk < 0)
+	bytes = read(fd, buff, letters);
+
+	if (bytes == -1)
+	{
+		close(fd);
+		free(buff);
 		return (0);
+	}
 
-	close(fild);
-	free(buffer);
-	return (chk);
+	r = write(STDOUT_FILENO, buff, bytes);
+
+	if (r == -1)
+	{
+		close(fd);
+		free(buff);
+		return (0);
+	}
+	close(fd);
+	return (bytes);
 }
