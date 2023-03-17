@@ -1,1 +1,1 @@
-doubly
+Doubly linked
