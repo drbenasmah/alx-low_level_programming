@@ -1,1 +1,1 @@
-Static libs
+Dynamic libraries
